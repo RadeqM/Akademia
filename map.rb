@@ -4,6 +4,10 @@ class Map
     @array_map = ['1', '2', '2', '1', '2', '2', '1', '2', '2']
   end
 
+  def initialize_empty
+    @array_map = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+  end
+
   def get_array_map_i(i)
     return @array_map[i]
   end
@@ -53,10 +57,12 @@ class Map
       puts "Win"
       return true
     end
+
+    puts "\nNikt nie wygrał, gramy dalej!"
   end
 
   def put_sign(position, sign)
-    @array_map[position] = sign;
+    @array_map[position-1] = sign;
   end
 
   # 1 2 3
@@ -78,6 +84,19 @@ class Map
              'B1' => 8, 'b1' => 8,
              'C1' => 9, 'c1' => 9}
     return board[gets]
+  end
+
+  def check_draw(map)
+    counter = 0
+    for i in 0..map.length - 1
+      if map[i] != ' '
+        counter += 1
+      end
+      if counter == 9
+        return true
+      end
+    end
+    return false
   end
 
 end
